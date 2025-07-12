@@ -22,4 +22,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/alz-api:latest
             docker stop alz-api || true
             docker rm alz-api || true
-            docker run -d --name alz-api -p 80:80 ${{ secrets.DOCKER_USERNAME }}/alz-api:latest
+            docker run -d --name alz-api -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/alz-api:latest
