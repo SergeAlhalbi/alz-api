@@ -1,0 +1,25 @@
+name: Deploy to EC2
+
+on:
+  workflow_run:
+    workflows: ["Build and Push to Docker Hub"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKER_USERNAME }}/alz-api:latest
+            docker stop alz-api || true
+            docker rm alz-api || true
+            docker run -d --name alz-api -p 80:80 ${{ secrets.DOCKER_USERNAME }}/alz-api:latest
