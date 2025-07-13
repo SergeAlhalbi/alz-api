@@ -31,3 +31,11 @@ Thumbs.db
 
 # Environment
 .env
+
+# Ignore all dataset files
+datasets/**/*
+
+# But allow the folders leading to README.md
+!datasets/
+!datasets/**/
+!datasets/**/README.md
