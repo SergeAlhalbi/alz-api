@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy requirements and app files
 COPY requirements.txt .
-COPY app.py .
+COPY app/ ./app/
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -15,4 +15,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Run the app
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

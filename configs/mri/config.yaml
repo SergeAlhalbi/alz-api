@@ -1,0 +1,24 @@
+model:
+  name: vit
+  num_classes: 4
+
+dataset:
+  name: AlzheimerMRI
+  source: huggingface
+  split: train
+  cache_dir: null
+
+training:
+  seed: 42
+  batch_size: 8
+  epochs: 4
+  learning_rate: 0.0001
+  shuffle: true
+
+paths:
+  model_dir: outputs/models/mri
+  log_dir: outputs/logs/mri
+  eval_dir: outputs/eval/mri
+  model_file: vit_mri.pth
+
+device: cpu
