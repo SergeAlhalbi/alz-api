@@ -39,3 +39,17 @@ datasets/**/*
 !datasets/
 !datasets/**/
 !datasets/**/README.md
+
+# TensorBoard logs
+events.out.tfevents.*
+
+# Model checkpoints
+*.pth
+*.pt
+
+# PyTorch Lightning or custom logs
+outputs/logs/
+outputs/eval/
+
+# Editable package metadata
+*.egg-info/
