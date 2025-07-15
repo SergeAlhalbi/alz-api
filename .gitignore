@@ -8,6 +8,7 @@ __pycache__/
 .venv/
 env/
 venv/
+deploy-env/
 
 # OS files
 .DS_Store
@@ -28,9 +29,6 @@ Thumbs.db
 *.pid
 *.tar
 *.sock
-
-# Environment
-.env
 
 # Ignore all dataset files
 datasets/**/*
