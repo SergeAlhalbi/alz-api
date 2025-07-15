@@ -1,0 +1,53 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+deploy-env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter/IPython
+.ipynb_checkpoints/
+
+# VSCode / IDEs
+.vscode/
+.idea/
+
+# Logs and local output
+*.log
+*.sqlite3
+
+# Docker
+*.pid
+*.tar
+*.sock
+
+# Ignore all dataset files
+datasets/**/*
+
+# But allow the folders leading to README.md
+!datasets/
+!datasets/**/
+!datasets/**/README.md
+
+# TensorBoard logs
+events.out.tfevents.*
+
+# PyTorch Lightning or custom logs
+outputs/logs/
+outputs/eval/
+
+# Editable package metadata
+*.egg-info/
+
+# Git and GitHub
+.git/
+.github/
