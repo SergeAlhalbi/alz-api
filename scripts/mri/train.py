@@ -3,6 +3,7 @@ from datetime import datetime
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader, Subset
+from torchvision.models import ViT_B_16_Weights
 from domains.mri.dataset import MRIClassifierDataset
 from domains.mri.model import AlzheimerMRIModel
 from training.trainer import Trainer
@@ -28,7 +29,8 @@ if __name__ == "__main__":
     # Setup
     model_wrapper = AlzheimerMRIModel(
         num_classes=config["model"]["num_classes"],
-        device=device
+        device=device,
+        weights=ViT_B_16_Weights.DEFAULT
     )
     model = model_wrapper.get_model()
 
