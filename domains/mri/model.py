@@ -4,9 +4,9 @@ import torch.nn.functional as F
 from models.vit import ViTClassifier
 
 class AlzheimerMRIModel:
-    def __init__(self, num_classes=4, device=None):
+    def __init__(self, num_classes=None, device=None, weights=None):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = ViTClassifier(num_classes=num_classes).to(self.device)
+        self.model = ViTClassifier(num_classes=num_classes, weights=weights).to(self.device)
 
     def predict(self, x: torch.Tensor, return_probs: bool = False):
         self.model.eval()

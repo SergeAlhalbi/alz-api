@@ -26,7 +26,8 @@ def predict(image_input, config_path="configs/mri/config.yaml"):
     
     model_wrapper = AlzheimerMRIModel(
         num_classes=config["model"]["num_classes"],
-        device=device
+        device=device,
+        weights=None
     )
     model_path = os.path.join(config["paths"]["model_dir"], config["paths"]["model_file"])
     model_wrapper.load_weights(model_path)
