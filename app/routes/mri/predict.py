@@ -23,6 +23,9 @@ CLASSES = ["Mild Demented", "Moderate Demented", "Non Demented", "Very Mild Deme
 #     })
 
 @router.post("/mri/predict")
-async def predict_mri(file: UploadFile = File(...)):
-    print("[DEBUG] File received:", file.filename)
-    return {"class": "AD", "confidence": 0.95}
+async def mri_predict(file: UploadFile = File(...)):
+    print("[DEBUG] /mri/predict endpoint hit.")
+    image_bytes = await file.read()
+    print("[DEBUG] File received, size:", len(image_bytes))
+
+    return {"message": "File received successfully"}
