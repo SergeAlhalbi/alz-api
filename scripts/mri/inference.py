@@ -35,8 +35,8 @@ def predict(image_input, config_path="configs/mri/config.yaml"):
         )
         model_path = os.path.join(config["paths"]["model_dir"], config["paths"]["model_file"])
         print(f"[DEBUG] Loading model weights from: {model_path}")
-        model_wrapper.load_weights(model_path)
-        print("[DEBUG] Model weights loaded.")
+        # model_wrapper.load_weights(model_path)
+        # print("[DEBUG] Model weights loaded.")
 
         print("[DEBUG] Preprocessing image...")
         image_tensor = load_image(image_input, device)
