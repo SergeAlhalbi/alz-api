@@ -19,3 +19,9 @@ app.include_router(predict.router)
 @app.get("/")
 def root():
     return {"message": "Welcome to the Alzheimer's Prediction API. Go to /docs to try it."}
+
+# Test endpoint to debug POST functionality
+@app.post("/ping")
+async def ping():
+    print("[DEBUG] >>> POST /ping <<<")
+    return {"status": "pong"}
