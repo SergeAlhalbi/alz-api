@@ -8,8 +8,11 @@ CLASSES = ["Mild Demented", "Moderate Demented", "Non Demented", "Very Mild Deme
 
 @router.post("/mri/predict")
 async def mri_predict(file: UploadFile = File(...)):
+    print("[DEBUG] /mri/predict endpoint hit.")
     image_bytes = await file.read()
+    print("[DEBUG] File received, size:", len(image_bytes))
     predicted_class, probs = predict(image_bytes)
+    print("[DEBUG] Returning prediction response.")
 
     return JSONResponse(content={
         "prediction": CLASSES[predicted_class],
