@@ -21,28 +21,32 @@ def load_image(image_input, device):
     return image.to(device)
 
 def predict(image_input, config_path="configs/mri/config.yaml"):
-    print("[DEBUG] Loading config...")
-    config = load_config(config_path)
-    device = config["device"]
-    print(f"[DEBUG] Device set to: {device}")
-    
-    print("[DEBUG] Initializing AlzheimerMRIModel...")
-    model_wrapper = AlzheimerMRIModel(
-        num_classes=config["model"]["num_classes"],
-        device=device,
-        weights=None
-    )
-    model_path = os.path.join(config["paths"]["model_dir"], config["paths"]["model_file"])
-    print(f"[DEBUG] Loading model weights from: {model_path}")
-    model_wrapper.load_weights(model_path)
-    print("[DEBUG] Model weights loaded.")
+    try:
+        print("[DEBUG] Loading config...")
+        config = load_config(config_path)
+        device = config["device"]
+        print(f"[DEBUG] Device set to: {device}")
 
-    print("[DEBUG] Preprocessing image...")
-    image_tensor = load_image(image_input, device)
-    probs = model_wrapper.predict(image_tensor, return_probs=True).cpu().numpy()[0]
-    predicted_class = int(probs.argmax())
-    print(f"[DEBUG] Prediction complete. Predicted class: {predicted_class}")
-    return predicted_class, probs.tolist()
+        print("[DEBUG] Initializing AlzheimerMRIModel...")
+        model_wrapper = AlzheimerMRIModel(
+            num_classes=config["model"]["num_classes"],
+            device=device,
+            weights=None
+        )
+        model_path = os.path.join(config["paths"]["model_dir"], config["paths"]["model_file"])
+        print(f"[DEBUG] Loading model weights from: {model_path}")
+        model_wrapper.load_weights(model_path)
+        print("[DEBUG] Model weights loaded.")
+
+        print("[DEBUG] Preprocessing image...")
+        image_tensor = load_image(image_input, device)
+        probs = model_wrapper.predict(image_tensor, return_probs=True).cpu().numpy()[0]
+        predicted_class = int(probs.argmax())
+        print(f"[DEBUG] Prediction complete. Predicted class: {predicted_class}")
+        return predicted_class, probs.tolist()
+    except Exception as e:
+        print("[ERROR] Exception in predict():", str(e))
+        raise
 
 # Example
 if __name__ == "__main__":
