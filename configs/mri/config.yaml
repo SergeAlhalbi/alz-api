@@ -1,5 +1,5 @@
 model:
-  name: vit
+  name: mobilenetv2 # vit
   num_classes: 4
 
 dataset:
@@ -19,6 +19,6 @@ paths:
   model_dir: outputs/models/mri
   log_dir: outputs/logs/mri
   eval_dir: outputs/eval/mri
-  model_file: vit_mri.pth
+  model_file: mobilenetv2_mri_20250721_200204.pth # vit_mri.pth
 
 device: cpu

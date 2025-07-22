@@ -3,7 +3,7 @@ from datetime import datetime
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader, Subset
-from torchvision.models import ViT_B_16_Weights
+from torchvision.models import ViT_B_16_Weights, MobileNet_V2_Weights
 from domains.mri.dataset import MRIClassifierDataset
 from domains.mri.model import AlzheimerMRIModel
 from training.trainer import Trainer
@@ -15,7 +15,16 @@ if __name__ == "__main__":
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
     os.chdir(project_root)
 
+    # Auto-select weights based on architecture
     config = load_config("configs/mri/config.yaml")
+    architecture = config["model"]["name"]
+    if architecture == "vit":
+        weights = ViT_B_16_Weights.DEFAULT
+    elif architecture == "mobilenetv2":
+        weights = MobileNet_V2_Weights.DEFAULT
+    else:
+        weights = None  # in case you want to train from scratch
+
     set_seed(config["training"]["seed"])
     device = config["device"]
 
@@ -30,7 +39,8 @@ if __name__ == "__main__":
     model_wrapper = AlzheimerMRIModel(
         num_classes=config["model"]["num_classes"],
         device=device,
-        weights=ViT_B_16_Weights.DEFAULT
+        weights=weights,
+        architecture=architecture
     )
     model = model_wrapper.get_model()
 
@@ -52,7 +62,7 @@ if __name__ == "__main__":
     trainer.train(epochs=config["training"]["epochs"])
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    model_filename = f"vit_mri_{timestamp}.pth"
+    model_filename = f"{architecture}_mri_{timestamp}.pth"
     model_path = os.path.join(output_path, model_filename)
     torch.save(model.state_dict(), model_path)
     print(f"Model saved to {model_path}")

@@ -1,5 +1,5 @@
 import torch.nn as nn
-from torchvision.models import vit_b_16, ViT_B_16_Weights
+from torchvision.models import vit_b_16
 
 class ViTClassifier(nn.Module):
     def __init__(self, num_classes, weights=None):
