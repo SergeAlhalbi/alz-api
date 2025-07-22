@@ -37,7 +37,13 @@ class Evaluator:
     def _log(self, metrics):
         print(f"\n[{self.split_name.upper()}] Evaluation Metrics:")
         for key, value in metrics.items():
-            if key != "confusion_matrix":
+            if isinstance(value, dict):
+                print(f"{key.capitalize()}:")
+                for sub_key, sub_value in value.items():
+                    print(f"  {sub_key.capitalize()}: {sub_value}")
+            elif isinstance(value, list):
+                print(f"{key.capitalize()}: {value}")
+            else:
                 print(f"{key.capitalize()}: {value:.4f}")
 
         if self.output_dir is None:
