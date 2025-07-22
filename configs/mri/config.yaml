@@ -10,8 +10,8 @@ dataset:
 
 training:
   seed: 42
-  batch_size: 8
-  epochs: 4
+  batch_size: 16 # 8
+  epochs: 15 # 4
   learning_rate: 0.0001
   shuffle: true
 
@@ -19,6 +19,6 @@ paths:
   model_dir: outputs/models/mri
   log_dir: outputs/logs/mri
   eval_dir: outputs/eval/mri
-  model_file: mobilenetv2_mri_20250721_200204.pth # vit_mri.pth
+  model_file: mobilenetv2_mri_20250721_214652.pth # vit_mri.pth
 
 device: cpu

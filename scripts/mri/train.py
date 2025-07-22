@@ -45,7 +45,7 @@ if __name__ == "__main__":
     model = model_wrapper.get_model()
 
     train_dataset = MRIClassifierDataset(split=config["dataset"]["split"])
-    train_dataset = Subset(train_dataset, range(20))  # only 20 samples
+    # train_dataset = Subset(train_dataset, range(20))  # only 20 samples
     train_loader = DataLoader(
         train_dataset,
         batch_size=config["training"]["batch_size"],
