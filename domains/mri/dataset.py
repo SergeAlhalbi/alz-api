@@ -21,6 +21,8 @@ class MRIClassifierDataset(Dataset):
         label = item["label"]
 
         if isinstance(image, Image.Image):
+            # print(f"[DEBUG] Original image size at index {idx}: {image.size}")  # (width, height)
             image = self.transform(image)
+            # print(f"[DEBUG] Transformed image shape: {image.shape}")  # torch.Size([3, 224, 224])
 
         return image, label
